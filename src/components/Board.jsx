@@ -57,8 +57,6 @@ export default function Board() {
     );
   };
 
-  console.log(flippedCard);
-
   return (
     <div className="h-screen flex items-center justify-center p-8">
       <div className="grid grid-cols-3 w-full max-w-md items-center justify-center gap-2">

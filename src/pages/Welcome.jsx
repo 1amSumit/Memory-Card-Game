@@ -1,5 +1,5 @@
 import React from "react";
-import { FaPlay, FaBrain } from "react-icons/fa";
+import { FaBrain } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Welcome = () => {
@@ -19,8 +19,7 @@ const Welcome = () => {
           to={"/username"}
           className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center mx-auto"
         >
-          <FaPlay className="mr-2" />
-          Start Game
+          Welcome
         </Link>
         <div className="mt-8 flex items-center justify-center text-gray-500">
           <FaBrain className="mr-2" />

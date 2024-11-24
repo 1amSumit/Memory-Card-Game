@@ -1,8 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaPlay, FaBrain } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useRecoilState } from "recoil";
+import { usernameState } from "../store/username";
 
 const UserName = () => {
+  const [username, setUsername] = useRecoilState(usernameState);
+  const [err, setErr] = useState("");
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    console.log(err);
+  }, [err]);
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (username.trim() === "") {
+      setErr("Please enter a username");
+      return;
+    }
+
+    localStorage.setItem("username", username);
+    setErr("");
+
+    navigate("/");
+  };
+
+  const handleInputChange = (e) => {
+    setUsername(e.target.value);
+    if (err) {
+      setErr("");
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-600 to-blue-500 flex items-center justify-center p-4">
       <div className="bg-white rounded-lg shadow-2xl p-8 max-w-md w-full text-center">
@@ -12,22 +42,27 @@ const UserName = () => {
         <h1 className="text-4xl font-bold text-gray-800 mb-4">
           Memory Maestro
         </h1>
-        <div className="flex flex-col gap-2">
-          <label htmlFor="username">Enter your name</label>
-          <input
-            type="text"
-            placeholder="Jhon"
-            id="username"
-            className="ring-green-400"
-          />
-        </div>
-        <Link
-          to={"/username"}
-          className="bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center mx-auto"
-        >
-          <FaPlay className="mr-2" />
-          Start Game
-        </Link>
+        <form onSubmit={submitHandler}>
+          <div className="flex flex-col gap-2 items-center justify-center">
+            <label htmlFor="username">Enter your name</label>
+            <input
+              type="text"
+              placeholder="John"
+              id="username"
+              className="border-[1px] w-full border-green-500 px-6 py-3 mb-1 rounded-full outline-none placeholder:font-bold font-bold"
+              value={username}
+              onChange={handleInputChange}
+            />
+            {err && <p className="text-red-500 mb-2">{err}</p>}
+          </div>
+          <button
+            type="submit"
+            className="bg-green-500 w-full hover:bg-green-600 text-white font-bold py-3 px-6 rounded-full text-lg transition duration-300 ease-in-out transform hover:scale-105 flex items-center justify-center mx-auto"
+          >
+            <FaPlay className="mr-2" />
+            Start Game
+          </button>
+        </form>
         <div className="mt-8 flex items-center justify-center text-gray-500">
           <FaBrain className="mr-2" />
           <span>Train your brain, have fun!</span>

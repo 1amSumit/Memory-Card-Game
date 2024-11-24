@@ -9,11 +9,15 @@ export default function RootLayout() {
 
   useEffect(() => {
     const username = localStorage.getItem("username") || "";
+
     if (username.trim() === "") {
+      console.log("No username found, redirecting to welcome.");
       navigate("/welcome");
+    } else {
+      console.log("Username found: ", username);
+      setUsr(username);
+      navigate("/");
     }
-    setUsr(username);
-    navigate("/");
   }, [navigate, setUsr]);
 
   return (

@@ -24,7 +24,7 @@ export default function Home() {
   const cardIds = [1, 2, 3, 3, 2, 1, 1, 3, 2];
 
   return (
-    <div className="h-screen overflow-hidden p-4 bg-gray-900">
+    <div>
       <div className="flex flex-row justify-between">
         <h2 className="text-gray-200 font-bold font-sour text-2xl">
           Hello {username}

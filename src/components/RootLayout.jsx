@@ -7,11 +7,15 @@ import {
   MdOutlineMusicOff as MusicOff,
 } from "react-icons/md";
 
+import { CiPause1 as Pause } from "react-icons/ci";
+
 export default function RootLayout() {
   const [usr, setUsr] = useRecoilState(usernameState);
   const navigate = useNavigate();
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [pauseHover, setPauseHover] = useState(false);
+  // const [musicHover, setMusicHover] = useState(false);
 
   const toggleMusic = () => {
     if (isPlaying) {
@@ -32,27 +36,75 @@ export default function RootLayout() {
     } else {
       console.log("Username found: ", username);
       setUsr(username);
-      navigate("/");
+      navigate("/play");
     }
   }, [navigate, setUsr]);
 
+  useEffect(() => {
+    const handleKeyPress = (event) => {
+      if (event.key === "Escape") {
+        navigate("/play");
+      } else if (event.key === "m" || event.key === "M") {
+        toggleMusic();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyPress);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyPress);
+    };
+  }, [navigate, toggleMusic]);
+
   return (
-    <main className="h-[100vh] overflow-hidden flex flex-col p-4 bg-gray-900">
+    <main className="h-[100vh] bg-gray-900 p-4 overflow-hidden flex flex-col">
       <div className="h-[90vh]">
         <Outlet />
       </div>
-      <footer className="h-[10vh]">
-        <div>
+      <footer className="h-[10vh] flex flex-row gap-4">
+        <div className="">
           {isPlaying ? (
             <MusicOn
+              // onMouseEnter={() => {
+              //   setMusicHover(true);
+              // }}
+              // onMouseLeave={() => {
+              //   setMusicHover(false);
+              // }}
               onClick={toggleMusic}
               className="text-gray-200  w-6 h-6 cursor-pointer"
             />
           ) : (
             <MusicOff
+              // onMouseEnter={() => {
+              //   setMusicHover(true);
+              // }}
+              // onMouseLeave={() => {
+              //   setMusicHover(false);
+              // }}
               onClick={toggleMusic}
               className="text-gray-200  w-6 h-6 cursor-pointer"
             />
+          )}
+          {/* {musicHover && (
+            <span className="text-white">
+              {isPlaying ? "Pause" : "Play"} music
+            </span>
+          )} */}
+        </div>
+        <div>
+          <Pause
+            onClick={() => navigate("/play")}
+            onMouseLeave={() => {
+              setPauseHover(false);
+            }}
+            onMouseEnter={() => {
+              setPauseHover(true);
+            }}
+            className="text-gray-200 w-6 h-6 cursor-pointer"
+          />
+          {pauseHover && (
+            <span className="text-white font-sour">Pause game</span>
           )}
         </div>
       </footer>

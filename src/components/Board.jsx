@@ -58,34 +58,36 @@ export default function Board() {
   };
 
   return (
-    <div className="h-screen flex items-center justify-center p-8">
-      <div className="grid grid-cols-3 w-full max-w-md items-center justify-center gap-2">
-        {shuffledCards.map((card, index) => (
-          <motion.div
-            animate={{
-              rotateY:
-                flippedCard.includes(card.id) || card.isMatched ? 180 : 0,
-            }}
-            transition={{ duration: 0.4 }}
-            key={index}
-            onClick={() => handleCardClick(card.id)}
-            className={`w-[5rem] h-[5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
-              flippedCard.includes(card.id) || card.isMatched
-                ? "bg-purple-600"
-                : "bg-yellow-400"
-            }`}
-          >
-            <div
-              className={`${
+    <div className="bg-gray-900 p-4">
+      <div className="h-screen flex items-center justify-center p-8">
+        <div className="grid grid-cols-3 w-full max-w-md items-center justify-center gap-2">
+          {shuffledCards.map((card, index) => (
+            <motion.div
+              animate={{
+                rotateY:
+                  flippedCard.includes(card.id) || card.isMatched ? 180 : 0,
+              }}
+              transition={{ duration: 0.4 }}
+              key={index}
+              onClick={() => handleCardClick(card.id)}
+              className={`w-[5rem] h-[5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
                 flippedCard.includes(card.id) || card.isMatched
-                  ? "block"
-                  : "hidden"
+                  ? "bg-purple-600"
+                  : "bg-yellow-400"
               }`}
             >
-              {card.icon}
-            </div>
-          </motion.div>
-        ))}
+              <div
+                className={`${
+                  flippedCard.includes(card.id) || card.isMatched
+                    ? "block"
+                    : "hidden"
+                }`}
+              >
+                {card.icon}
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </div>
   );

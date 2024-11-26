@@ -8,6 +8,14 @@ import {
 } from "react-icons/md";
 
 import { CiPause1 as Pause } from "react-icons/ci";
+import {
+  easyHighScoreState,
+  hardHighScoreState,
+  mediumHighScoreState,
+  userScoreEasyState,
+  userScoreHardState,
+  userScoreMediumState,
+} from "../store/score";
 
 export default function RootLayout() {
   const [usr, setUsr] = useRecoilState(usernameState);
@@ -16,7 +24,34 @@ export default function RootLayout() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [pauseHover, setPauseHover] = useState(false);
 
-  useEffect(() => {}, []);
+  const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
+  const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
+  const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
+
+  const [easyHighScore, setEasyHighScore] = useRecoilState(easyHighScoreState);
+  const [mediumHighScore, setMediumScore] =
+    useRecoilState(mediumHighScoreState);
+
+  const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
+
+  useEffect(() => {
+    const easyScore = parseInt(localStorage.getItem("easyScore")) || 0;
+    const mediumScore = parseInt(localStorage.getItem("mediumScore")) || 0;
+    const hardScore = parseInt(localStorage.getItem("hardScore")) || 0;
+
+    const easyHighScore = parseInt(localStorage.getItem("easyHighScore")) || 0;
+    const mediumHighScore =
+      parseInt(localStorage.getItem("mediumHighScore")) || 0;
+    const hardHighScore = parseInt(localStorage.getItem("hardHighScore")) || 0;
+
+    setScoreEasy(easyScore);
+    setScoreMedium(mediumScore);
+    setScoreHard(hardScore);
+
+    setEasyHighScore(easyHighScore);
+    setMediumScore(mediumHighScore);
+    setHardHighScore(hardHighScore);
+  }, []);
 
   const toggleMusic = () => {
     if (isPlaying) {
@@ -56,7 +91,7 @@ export default function RootLayout() {
   }, [navigate, toggleMusic]);
 
   return (
-    <main className="h-[100vh] bg-gray-900 p-4 overflow-hidden flex flex-col">
+    <main className="h-[100vh] bg-gray-900 p-1 lg:p-4 overflow-hidden flex flex-col">
       <div className="h-[90vh]">
         <Outlet />
       </div>

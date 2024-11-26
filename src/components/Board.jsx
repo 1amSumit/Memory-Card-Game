@@ -8,7 +8,9 @@ import { matchLevelState } from "../store/match";
 import { timeState } from "../store/Timer";
 import { gameLevelState } from "../store/level";
 import {
-  highScoreState,
+  easyHighScoreState,
+  hardHighScoreState,
+  mediumHighScoreState,
   userScoreEasyState,
   userScoreHardState,
   userScoreMediumState,
@@ -29,23 +31,33 @@ export default function Board() {
   const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
   const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
   const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
-  const [highScore, setHighScore] = useRecoilState(highScoreState);
+  const [easyHighScore, setEasyHighScore] = useRecoilState(easyHighScoreState);
+  const [mediumHighScore, setMediumHighScore] =
+    useRecoilState(mediumHighScoreState);
+  const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
   const [timePased, setTimePased] = useState(0);
 
   useEffect(() => {
-    localStorage.setItem("easyScoreUser", scoreEasy);
-    localStorage.setItem("easyScoreMedium", scoreMedium);
-    localStorage.setItem("easyScoreHard", scoreHard);
-    localStorage.setItem("highScore", highScore);
-  }, [scoreEasy, scoreMedium, scoreHard]);
+    localStorage.setItem("easyScore", scoreEasy || 0);
+    localStorage.setItem("mediumScore", scoreMedium || 0);
+    localStorage.setItem("hardScore", scoreHard || 0);
+    localStorage.setItem("easyHighScore", easyHighScore || 0);
+    localStorage.setItem("mediumHighScore", mediumHighScore || 0);
+    localStorage.setItem("hardHighScore", hardHighScore || 0);
+  }, [
+    scoreEasy,
+    scoreMedium,
+    scoreHard,
+    easyHighScore,
+    mediumHighScore,
+    hardHighScore,
+  ]);
 
   useState(() => {
     setTimeout(() => {
       setTimePased((prev) => prev + 1);
     }, 1000);
   }, [timePased, setTimePased]);
-
-  console.log(scoreEasy);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -82,6 +94,10 @@ export default function Board() {
           } else {
             setScoreEasy((prev) => prev + 10);
           }
+
+          if (scoreEasy > easyHighScore) {
+            setEasyHighScore(scoreEasy);
+          }
         }
         if (level === "medium") {
           if (timePased <= 10 && timePased > 5) {
@@ -93,6 +109,10 @@ export default function Board() {
           } else {
             setScoreMedium((prev) => prev + 20);
           }
+
+          if (scoreMedium > mediumHighScore) {
+            setMediumHighScore(scoreMedium);
+          }
         }
         if (level === "hard") {
           if (timePased <= 10 && timePased > 5) {
@@ -103,6 +123,9 @@ export default function Board() {
             setScoreHard((prev) => prev + 30);
           } else {
             setScoreHard((prev) => prev + 30);
+          }
+          if (scoreHard > hardHighScore) {
+            setHardHighScore(scoreHard);
           }
         }
 
@@ -144,9 +167,9 @@ export default function Board() {
   };
 
   return (
-    <div className="bg-gray-900 p-4">
-      <div className="h-screen mt-[4rem] justify-center p-8">
-        <div className="grid grid-cols-2 w-full max-w-md  justify-center gap-2">
+    <div className="bg-gray-900 p-2 lg:p-4">
+      <div className="h-screen lg:mt-[4rem] justify-center p-8">
+        <div className="grid grid-cols-3 w-full max-w-md  justify-center gap-2">
           {shuffledCards.map((card, index) => (
             <motion.div
               animate={{

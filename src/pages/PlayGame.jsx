@@ -21,7 +21,7 @@ export function PlayGame() {
         <h1 className="text-5xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-indigo-500 to-purple-600 mb-8 animate-pulse">
           Memory Maestro
         </h1>
-        <div className="space-y-8 space-x-6">
+        <div className=" flex flex-col gap-8 md:flex-row  items-center justify-center">
           <MenuButton onClick={() => navigate("/")}>Play</MenuButton>
           <MenuButton onClick={() => console.log("Settings clicked")}>
             Settings

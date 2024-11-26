@@ -1,7 +1,9 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { highScoreUsername, usernameState } from "../store/username";
 import {
-  highScoreState,
+  easyHighScoreState,
+  hardHighScoreState,
+  mediumHighScoreState,
   userScoreEasyState,
   userScoreHardState,
   userScoreMediumState,
@@ -19,7 +21,11 @@ export default function Home() {
   const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
   const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
 
-  const [highScore, setHighScore] = useRecoilState(highScoreState);
+  const [easyHighScore, setEasyHighScore] = useRecoilState(easyHighScoreState);
+  const [mediumHighScore, setMediumScore] =
+    useRecoilState(mediumHighScoreState);
+  const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
+
   const level = useRecoilValue(gameLevelState);
   const match = useRecoilValue(matchLevelState);
   const [time, setTime] = useRecoilState(timeState);
@@ -46,18 +52,22 @@ export default function Home() {
     <div>
       <div className="flex flex-row justify-between">
         <div className="flex flex-col gap-[2rem]">
-          <h2 className="text-gray-200 font-bold font-sour text-4xl">
+          <h2 className="text-gray-200 font-bold font-sour text-xl md:text-4xl">
             Hello {username}
           </h2>
 
           <div>
-            <p className="text-gray-200 text-2xl font-sour">Level: {level}</p>
-            <p className="text-gray-200 text-2xl font-sour">Match: {match}</p>
+            <p className="text-gray-200 text-lg md:text-2xl font-sour">
+              Level: {level}
+            </p>
+            <p className="text-gray-200 text-lg md:text-2xl font-sour">
+              Match: {match}
+            </p>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <p className="font-sour text-2xl text-gray-200">
+          <p className="font-sour text-sm md:text-lg lg:text-2xl text-gray-200">
             Your Score:{" "}
             {level === "easy"
               ? scoreEasy
@@ -65,14 +75,22 @@ export default function Home() {
               ? scoreMedium
               : scoreHard}
           </p>
-          <p className="font-sour text-xl text-gray-200">
-            High Score: {highScore} by {highScoreUser}
+          <p className="font-sour text-sm md:text-lg lg:text-2xl text-gray-200">
+            High Score:{" "}
+            {level === "easy"
+              ? easyHighScore
+              : level === "medium"
+              ? mediumHighScore
+              : hardHighScore}{" "}
+            by {highScoreUser}
           </p>
         </div>
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        <p className="text-gray-200 text-3xl font-sour">Timer: {seconds}</p>
+        <p className="text-gray-200 text-lg lg:text-3xl font-sour">
+          Timer: {seconds}
+        </p>
 
         {seconds === 0 ? (
           <p className="text-xl text-gray-200">Restart</p>

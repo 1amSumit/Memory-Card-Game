@@ -13,7 +13,15 @@ export const userScoreHardState = atom({
   default: 0,
 });
 
-export const highScoreState = atom({
-  key: "highScoreState",
+export const easyHighScoreState = atom({
+  key: "easyHighScoreState",
+  default: 0,
+});
+export const mediumHighScoreState = atom({
+  key: "mediumHighScoreState",
+  default: 0,
+});
+export const hardHighScoreState = atom({
+  key: "hardHighScoreState",
   default: 0,
 });

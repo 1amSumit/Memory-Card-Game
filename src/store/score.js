@@ -1,7 +1,15 @@
 import { atom } from "recoil";
 
-export const userScoreState = atom({
-  key: "userScoreState",
+export const userScoreEasyState = atom({
+  key: "userScoreEasyState",
+  default: 0,
+});
+export const userScoreMediumState = atom({
+  key: "userScoreMediumState",
+  default: 0,
+});
+export const userScoreHardState = atom({
+  key: "userScoreHardState",
   default: 0,
 });
 

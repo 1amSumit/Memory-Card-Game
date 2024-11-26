@@ -32,7 +32,7 @@ export default function Levels() {
             <LevelButton
               key={level}
               difficulty={difficulty}
-              onClick={() => setSelectedLevel(difficulty)}
+              onClick={() => setSelectedLevel(difficulty.toLowerCase())}
             />
           ))}
         </div>

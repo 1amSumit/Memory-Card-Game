@@ -16,6 +16,8 @@ export default function RootLayout() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [pauseHover, setPauseHover] = useState(false);
 
+  useEffect(() => {}, []);
+
   const toggleMusic = () => {
     if (isPlaying) {
       audioRef.current.pause();

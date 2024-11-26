@@ -7,6 +7,12 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { matchLevelState } from "../store/match";
 import { timeState } from "../store/Timer";
 import { gameLevelState } from "../store/level";
+import {
+  highScoreState,
+  userScoreEasyState,
+  userScoreHardState,
+  userScoreMediumState,
+} from "../store/score";
 
 export default function Board() {
   const cards = [
@@ -20,6 +26,26 @@ export default function Board() {
   const [match, setMatch] = useRecoilState(matchLevelState);
   const [time, setTime] = useRecoilState(timeState);
   const level = useRecoilValue(gameLevelState);
+  const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
+  const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
+  const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
+  const [highScore, setHighScore] = useRecoilState(highScoreState);
+  const [timePased, setTimePased] = useState(0);
+
+  useEffect(() => {
+    localStorage.setItem("easyScoreUser", scoreEasy);
+    localStorage.setItem("easyScoreMedium", scoreMedium);
+    localStorage.setItem("easyScoreHard", scoreHard);
+    localStorage.setItem("highScore", highScore);
+  }, [scoreEasy, scoreMedium, scoreHard]);
+
+  useState(() => {
+    setTimeout(() => {
+      setTimePased((prev) => prev + 1);
+    }, 1000);
+  }, [timePased, setTimePased]);
+
+  console.log(scoreEasy);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -47,7 +73,40 @@ export default function Board() {
         setTime((prev) => prev - 5);
 
         if (level === "easy") {
+          if (timePased <= 10 && timePased > 5) {
+            setScoreEasy((prev) => prev + 5);
+            setScoreEasy((prev) => prev + 10);
+          } else if (timePased > 0 && timePased <= 5) {
+            setScoreEasy((prev) => prev + 10);
+            setScoreEasy((prev) => prev + 10);
+          } else {
+            setScoreEasy((prev) => prev + 10);
+          }
         }
+        if (level === "medium") {
+          if (timePased <= 10 && timePased > 5) {
+            setScoreMedium((prev) => prev + 5);
+            setScoreMedium((prev) => prev + 20);
+          } else if (timePased > 0 && timePased <= 5) {
+            setScoreMedium((prev) => prev + 10);
+            setScoreMedium((prev) => prev + 20);
+          } else {
+            setScoreMedium((prev) => prev + 20);
+          }
+        }
+        if (level === "hard") {
+          if (timePased <= 10 && timePased > 5) {
+            setScoreHard((prev) => prev + 5);
+            setScoreHard((prev) => prev + 30);
+          } else if (timePased > 0 && timePased <= 5) {
+            setScoreHard((prev) => prev + 10);
+            setScoreHard((prev) => prev + 30);
+          } else {
+            setScoreHard((prev) => prev + 30);
+          }
+        }
+
+        setTimePased(0);
       }, 1000);
     }
   }, [matchedPair, cards.length, setMatch, setTime]);

@@ -1,6 +1,11 @@
 import { useRecoilState, useRecoilValue } from "recoil";
 import { highScoreUsername, usernameState } from "../store/username";
-import { highScoreState, userScoreState } from "../store/score";
+import {
+  highScoreState,
+  userScoreEasyState,
+  userScoreHardState,
+  userScoreMediumState,
+} from "../store/score";
 import Board from "../components/Board";
 import { useEffect, useState } from "react";
 import { gameLevelState } from "../store/level";
@@ -10,7 +15,10 @@ import { timeState } from "../store/Timer";
 export default function Home() {
   const username = useRecoilValue(usernameState);
   const highScoreUser = useRecoilValue(highScoreUsername);
-  const [userScore, setUserScore] = useRecoilState(userScoreState);
+  const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
+  const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
+  const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
+
   const [highScore, setHighScore] = useRecoilState(highScoreState);
   const level = useRecoilValue(gameLevelState);
   const match = useRecoilValue(matchLevelState);
@@ -50,7 +58,12 @@ export default function Home() {
 
         <div className="flex flex-col gap-1">
           <p className="font-sour text-2xl text-gray-200">
-            Your Score: {userScore}
+            Your Score:{" "}
+            {level === "easy"
+              ? scoreEasy
+              : level === "medium"
+              ? scoreMedium
+              : scoreHard}
           </p>
           <p className="font-sour text-xl text-gray-200">
             High Score: {highScore} by {highScoreUser}

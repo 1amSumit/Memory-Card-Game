@@ -3,9 +3,10 @@ import { TbPlant2 } from "react-icons/tb";
 import { PiPlant } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 import { matchLevelState } from "../store/match";
 import { timeState } from "../store/Timer";
+import { gameLevelState } from "../store/level";
 
 export default function Board() {
   const cards = [
@@ -18,6 +19,7 @@ export default function Board() {
   const [matchedPair, setMatchedPair] = useState(0);
   const [match, setMatch] = useRecoilState(matchLevelState);
   const [time, setTime] = useRecoilState(timeState);
+  const level = useRecoilValue(gameLevelState);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -43,6 +45,9 @@ export default function Board() {
         setMatch((prev) => prev + 1);
         shuffleCards(cards);
         setTime((prev) => prev - 5);
+
+        if (level === "easy") {
+        }
       }, 1000);
     }
   }, [matchedPair, cards.length, setMatch, setTime]);

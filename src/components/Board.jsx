@@ -3,6 +3,9 @@ import { TbPlant2 } from "react-icons/tb";
 import { PiPlant } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
+import { matchLevelState } from "../store/match";
+import { timeState } from "../store/Timer";
 
 export default function Board() {
   const cards = [
@@ -13,8 +16,10 @@ export default function Board() {
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);
   const [matchedPair, setMatchedPair] = useState(0);
+  const [match, setMatch] = useRecoilState(matchLevelState);
+  const [time, setTime] = useRecoilState(timeState);
 
-  useEffect(() => {
+  const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
     const shuffleCards = dupliacteCards
       .sort(() => Math.random() - 0.5)
@@ -26,7 +31,24 @@ export default function Board() {
         isMatched: false,
       }));
 
+    setFlippedCard([]);
+    setMatchedPair(0);
+
     setShuffledCards(shuffleCards);
+  };
+
+  useEffect(() => {
+    if (matchedPair === cards.length) {
+      setTimeout(() => {
+        setMatch((prev) => prev + 1);
+        shuffleCards(cards);
+        setTime((prev) => prev - 5);
+      }, 1000);
+    }
+  }, [matchedPair, cards.length, setMatch, setTime]);
+
+  useEffect(() => {
+    shuffleCards(cards);
   }, []);
 
   useEffect(() => {
@@ -43,7 +65,7 @@ export default function Board() {
         setMatchedPair((prev) => prev + 1);
       }
 
-      setTimeout(() => setFlippedCard([]), 1000);
+      setTimeout(() => setFlippedCard([]), 600);
     }
   }, [flippedCard]);
 
@@ -59,8 +81,8 @@ export default function Board() {
 
   return (
     <div className="bg-gray-900 p-4">
-      <div className="h-screen flex items-center justify-center p-8">
-        <div className="grid grid-cols-3 w-full max-w-md items-center justify-center gap-2">
+      <div className="h-screen mt-[4rem] justify-center p-8">
+        <div className="grid grid-cols-2 w-full max-w-md  justify-center gap-2">
           {shuffledCards.map((card, index) => (
             <motion.div
               animate={{

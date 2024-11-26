@@ -26,9 +26,7 @@ export function PlayGame() {
           <MenuButton onClick={() => console.log("Settings clicked")}>
             Settings
           </MenuButton>
-          <MenuButton onClick={() => console.log("Levels clicked")}>
-            Levels
-          </MenuButton>
+          <MenuButton onClick={() => navigate("/level")}>Levels</MenuButton>
         </div>
       </div>
     </div>

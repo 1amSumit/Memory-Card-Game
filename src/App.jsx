@@ -4,6 +4,7 @@ import { PlayGame } from "./pages/PlayGame";
 import UserName from "./pages/UserName";
 import Welcome from "./pages/Welcome";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Levels from "./pages/Levels";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -14,6 +15,7 @@ export default function App() {
         { path: "welcome", element: <Welcome /> },
         { path: "username", element: <UserName /> },
         { path: "play", element: <PlayGame /> },
+        { path: "level", element: <Levels /> },
         { index: true, element: <Home /> },
       ],
     },

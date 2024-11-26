@@ -15,7 +15,6 @@ export default function RootLayout() {
   const audioRef = useRef(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [pauseHover, setPauseHover] = useState(false);
-  // const [musicHover, setMusicHover] = useState(false);
 
   const toggleMusic = () => {
     if (isPlaying) {
@@ -31,10 +30,8 @@ export default function RootLayout() {
     const username = localStorage.getItem("username") || "";
 
     if (username.trim() === "") {
-      console.log("No username found, redirecting to welcome.");
       navigate("/welcome");
     } else {
-      console.log("Username found: ", username);
       setUsr(username);
       navigate("/play");
     }
@@ -65,32 +62,15 @@ export default function RootLayout() {
         <div className="">
           {isPlaying ? (
             <MusicOn
-              // onMouseEnter={() => {
-              //   setMusicHover(true);
-              // }}
-              // onMouseLeave={() => {
-              //   setMusicHover(false);
-              // }}
               onClick={toggleMusic}
               className="text-gray-200  w-6 h-6 cursor-pointer"
             />
           ) : (
             <MusicOff
-              // onMouseEnter={() => {
-              //   setMusicHover(true);
-              // }}
-              // onMouseLeave={() => {
-              //   setMusicHover(false);
-              // }}
               onClick={toggleMusic}
               className="text-gray-200  w-6 h-6 cursor-pointer"
             />
           )}
-          {/* {musicHover && (
-            <span className="text-white">
-              {isPlaying ? "Pause" : "Play"} music
-            </span>
-          )} */}
         </div>
         <div>
           <Pause

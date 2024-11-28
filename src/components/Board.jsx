@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { matchLevelState } from "../store/match";
-import { timeState } from "../store/Timer";
 import { gameLevelState } from "../store/level";
 import {
   easyHighScoreState,
@@ -15,18 +14,22 @@ import {
   userScoreHardState,
   userScoreMediumState,
 } from "../store/score";
+import { turnState } from "../store/moves";
 
 export default function Board() {
   const cards = [
     { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
     { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
     { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    // { id: 4, name: "plant 4", icon: <PiPlant className="w-8 h-8" /> },
+    // { id: 5, name: "plant 5", icon: <PiPlant className="w-8 h-8" /> },
+    // { id: 6, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);
   const [matchedPair, setMatchedPair] = useState(0);
   const [match, setMatch] = useRecoilState(matchLevelState);
-  const [time, setTime] = useRecoilState(timeState);
+
   const level = useRecoilValue(gameLevelState);
   const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
   const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
@@ -35,15 +38,15 @@ export default function Board() {
   const [mediumHighScore, setMediumHighScore] =
     useRecoilState(mediumHighScoreState);
   const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
-  const [timePased, setTimePased] = useState(0);
+  const [turns, setTurns] = useRecoilState(turnState);
 
   useEffect(() => {
-    localStorage.setItem("easyScore", scoreEasy || 0);
-    localStorage.setItem("mediumScore", scoreMedium || 0);
-    localStorage.setItem("hardScore", scoreHard || 0);
-    localStorage.setItem("easyHighScore", easyHighScore || 0);
-    localStorage.setItem("mediumHighScore", mediumHighScore || 0);
-    localStorage.setItem("hardHighScore", hardHighScore || 0);
+    localStorage.setItem("easyScore", scoreEasy);
+    localStorage.setItem("mediumScore", scoreMedium);
+    localStorage.setItem("hardScore", scoreHard);
+    localStorage.setItem("easyHighScore", easyHighScore);
+    localStorage.setItem("mediumHighScore", mediumHighScore);
+    localStorage.setItem("hardHighScore", hardHighScore);
   }, [
     scoreEasy,
     scoreMedium,
@@ -52,12 +55,6 @@ export default function Board() {
     mediumHighScore,
     hardHighScore,
   ]);
-
-  useState(() => {
-    setTimeout(() => {
-      setTimePased((prev) => prev + 1);
-    }, 1000);
-  }, [timePased, setTimePased]);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -82,7 +79,6 @@ export default function Board() {
       setTimeout(() => {
         setMatch((prev) => prev + 1);
         shuffleCards(cards);
-        setTime((prev) => prev - 5);
 
         if (level === "easy") {
           if (timePased <= 10 && timePased > 5) {
@@ -132,7 +128,7 @@ export default function Board() {
         setTimePased(0);
       }, 1000);
     }
-  }, [matchedPair, cards.length, setMatch, setTime]);
+  }, [matchedPair, cards.length, setMatch]);
 
   useEffect(() => {
     shuffleCards(cards);
@@ -158,7 +154,14 @@ export default function Board() {
 
   const handleCardClick = (id) => {
     if (flippedCard.length === 2) return;
-    setFlippedCard((prev) => [...prev, id]);
+    if (flippedCard.includes(id)) return;
+
+    setFlippedCard((prev) => {
+      const newFlipped = [id, ...prev];
+      console.log(newFlipped);
+      return newFlipped;
+    });
+
     setShuffledCards((prevCards) =>
       prevCards.map((card, i) =>
         i === id ? { ...card, isFlipped: true } : card

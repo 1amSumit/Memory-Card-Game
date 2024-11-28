@@ -9,10 +9,9 @@ import {
   userScoreMediumState,
 } from "../store/score";
 import Board from "../components/Board";
-import { useEffect, useState } from "react";
 import { gameLevelState } from "../store/level";
 import { matchLevelState } from "../store/match";
-import { timeState } from "../store/Timer";
+import { turnState } from "../store/moves";
 
 export default function Home() {
   const username = useRecoilValue(usernameState);
@@ -28,25 +27,7 @@ export default function Home() {
 
   const level = useRecoilValue(gameLevelState);
   const match = useRecoilValue(matchLevelState);
-  const [time, setTime] = useRecoilState(timeState);
-  const [seconds, setSeconds] = useState(time);
-
-  useEffect(() => {
-    setSeconds(time);
-  }, [time]);
-
-  useEffect(() => {
-    if (seconds <= 0) {
-      setSeconds(0);
-      return;
-    }
-
-    const timer = setTimeout(() => {
-      setSeconds((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, [seconds, setTime]);
+  const [turns, setTurns] = useRecoilState(turnState);
 
   return (
     <div>
@@ -68,7 +49,7 @@ export default function Home() {
 
         <div className="flex flex-col gap-1">
           <p className="font-sour text-sm md:text-lg lg:text-2xl text-gray-200">
-            Your Score:{" "}
+            Your Score:
             {level === "easy"
               ? scoreEasy
               : level === "medium"
@@ -89,14 +70,9 @@ export default function Home() {
 
       <div className="flex flex-col items-center justify-center">
         <p className="text-gray-200 text-lg lg:text-3xl font-sour">
-          Timer: {seconds}
+          Turns: {turns}
         </p>
-
-        {seconds === 0 ? (
-          <p className="text-xl text-gray-200">Restart</p>
-        ) : (
-          <Board />
-        )}
+        <Board />
       </div>
     </div>
   );

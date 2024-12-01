@@ -18,21 +18,22 @@ import { turnState } from "../store/moves";
 
 export default function Board() {
   const cards = [
-    {
-      id: 1,
-      name: "plant 1",
-      icon: <RiPlantLine className="h-5 w-5 2xl:w-8 2xl:h-8" />,
-    },
-    {
-      id: 2,
-      name: "plant 2",
-      icon: <TbPlant2 className="h-5 w-5 2xl:w-8 2xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-5 w-5 2xl:w-8 2xl:h-8" />,
-    },
+    { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
+    { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
+    { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 4, name: "plant 4", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 5, name: "plant 5", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 6, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 7, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 8, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 9, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 10, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 11, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 12, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 13, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 14, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 15, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 16, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);
@@ -87,57 +88,63 @@ export default function Board() {
     if (matchedPair === cards.length) {
       setTimeout(() => {
         setMatch((prev) => prev + 1);
+
         shuffleCards(cards);
 
         if (level === "easy") {
-          if (timePased <= 10 && timePased > 5) {
-            setScoreEasy((prev) => prev + 5);
-            setScoreEasy((prev) => prev + 10);
-          } else if (timePased > 0 && timePased <= 5) {
-            setScoreEasy((prev) => prev + 10);
-            setScoreEasy((prev) => prev + 10);
+          if (turns > cards.length + 3) {
+            setScoreEasy((prev) => prev + 15);
+          } else if (turns === cards.length || turns === cards.length + 1) {
+            setScoreEasy((prev) => prev + 20);
           } else {
             setScoreEasy((prev) => prev + 10);
-          }
-
-          if (scoreEasy > easyHighScore) {
-            setEasyHighScore(scoreEasy);
           }
         }
         if (level === "medium") {
-          if (timePased <= 10 && timePased > 5) {
-            setScoreMedium((prev) => prev + 5);
-            setScoreMedium((prev) => prev + 20);
-          } else if (timePased > 0 && timePased <= 5) {
-            setScoreMedium((prev) => prev + 10);
-            setScoreMedium((prev) => prev + 20);
+          if (turns > cards.length + 3) {
+            setScoreMedium((prev) => prev + 25);
+          } else if (turns === cards.length || turns === cards.length + 1) {
+            setScoreMedium((prev) => prev + 30);
           } else {
             setScoreMedium((prev) => prev + 20);
-          }
-
-          if (scoreMedium > mediumHighScore) {
-            setMediumHighScore(scoreMedium);
           }
         }
         if (level === "hard") {
-          if (timePased <= 10 && timePased > 5) {
-            setScoreHard((prev) => prev + 5);
-            setScoreHard((prev) => prev + 30);
-          } else if (timePased > 0 && timePased <= 5) {
-            setScoreHard((prev) => prev + 10);
-            setScoreHard((prev) => prev + 30);
+          if (turns > cards.length + 3) {
+            setScoreHard((prev) => prev + 35);
+          } else if (turns === cards.length || turns === cards.length + 1) {
+            setScoreHard((prev) => prev + 40);
           } else {
             setScoreHard((prev) => prev + 30);
           }
-          if (scoreHard > hardHighScore) {
-            setHardHighScore(scoreHard);
+        }
+        if (level === "extreme") {
+          if (turns > cards.length + 3) {
+            setScoreHard((prev) => prev + 45);
+          } else if (turns === cards.length || turns === cards.length + 1) {
+            setScoreHard((prev) => prev + 50);
+          } else {
+            setScoreHard((prev) => prev + 40);
           }
         }
-
-        setTimePased(0);
+        setTurns(0);
       }, 1000);
     }
-  }, [matchedPair, cards.length, setMatch]);
+  }, [matchedPair, cards.length, setMatch, setTurns]);
+
+  useEffect(() => {
+    if (scoreEasy > easyHighScore) {
+      setEasyHighScore(scoreEasy);
+    }
+
+    if (scoreHard > hardHighScore) {
+      setHardHighScore(scoreHard);
+    }
+
+    if (scoreMedium > mediumHighScore) {
+      setMediumHighScore(scoreMedium);
+    }
+  }, [scoreEasy, scoreMedium, scoreHard]);
 
   useEffect(() => {
     shuffleCards(cards);
@@ -157,7 +164,9 @@ export default function Board() {
         setMatchedPair((prev) => prev + 1);
       }
 
-      setTimeout(() => setFlippedCard([]), 600);
+      setTimeout(() => {
+        setFlippedCard([]);
+      }, 600);
     }
   }, [flippedCard]);
 
@@ -167,7 +176,6 @@ export default function Board() {
 
     setFlippedCard((prev) => {
       const newFlipped = [id, ...prev];
-      console.log(newFlipped);
       return newFlipped;
     });
 
@@ -176,21 +184,19 @@ export default function Board() {
         i === id ? { ...card, isFlipped: true } : card
       )
     );
+
+    if (flippedCard.length >= 1) {
+      setTurns((prev) => prev + 1);
+    }
   };
 
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
-      <div className="h-screen lg:mt-[4rem]  p-2">
+      <div className="h-full lg:mt-[4rem] justify-center p-8">
         <div
-          className={`grid ${
-            level === "easy"
-              ? "grid-cols-3"
-              : level === "medium"
-              ? "grid-cols-4"
-              : level === "hard"
-              ? "grid-cols-6"
-              : "grid-cols-8"
-          } w-full    gap-2`}
+          className={`grid grid-cols-${
+            level === "easy" ? 3 : level === "medium" ? 4 : 5
+          } w-full max-w-md  justify-center gap-2`}
         >
           {shuffledCards.map((card, index) => (
             <motion.div
@@ -201,7 +207,7 @@ export default function Board() {
               transition={{ duration: 0.4 }}
               key={index}
               onClick={() => handleCardClick(card.id)}
-              className={`w-[2.5rem] h-[2.5rem] sm:w-[3rem] sm:h-[3rem] xl:w-[3.5rem] xl:h-[3.5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
+              className={`w-[5rem] h-[5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
                 flippedCard.includes(card.id) || card.isMatched
                   ? "bg-purple-600"
                   : "bg-yellow-400"

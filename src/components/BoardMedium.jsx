@@ -16,11 +16,16 @@ import {
 } from "../store/score";
 import { turnState } from "../store/moves";
 
-export default function Board() {
+export default function BoardMedium() {
   const cards = [
     { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
     { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
     { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 4, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 5, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 6, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 7, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 8, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);

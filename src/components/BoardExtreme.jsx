@@ -16,11 +16,40 @@ import {
 } from "../store/score";
 import { turnState } from "../store/moves";
 
-export default function Board() {
+export default function BoardExtreme() {
   const cards = [
     { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
     { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
     { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 4, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 5, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 6, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 7, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 8, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 9, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 10, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 11, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 12, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 13, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 14, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 15, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 16, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 17, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 18, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 19, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 20, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 21, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 22, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 23, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 24, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 25, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 26, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 27, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 28, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 29, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 30, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 31, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    { id: 32, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);
@@ -53,8 +82,9 @@ export default function Board() {
     hardHighScore,
   ]);
 
-  const shuffleCards = (cards) => {
-    const dupliacteCards = [...cards, ...cards];
+  const shuffleCards = (card) => {
+    const dupliacteCards = [...card, ...card];
+
     const shuffleCards = dupliacteCards
       .sort(() => Math.random() - 0.5)
       .map((card, index) => ({

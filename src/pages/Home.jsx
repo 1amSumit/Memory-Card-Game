@@ -12,6 +12,10 @@ import Board from "../components/Board";
 import { gameLevelState } from "../store/level";
 import { matchLevelState } from "../store/match";
 import { turnState } from "../store/moves";
+import BoardMedium from "../components/BoardMedium";
+import BoardHigh from "../components/BoardMedium";
+import BoardHard from "../components/BoardHard";
+import BoardExtreme from "../components/BoardExtreme";
 
 export default function Home() {
   const username = useRecoilValue(usernameState);
@@ -68,11 +72,19 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center justify-center">
+      <div className="flex flex-col items-center ">
         <p className="text-gray-200 text-xl 2xl:text-3xl font-sour">
           Turns: {turns}
         </p>
-        <Board />
+        {level === "easy" ? (
+          <Board />
+        ) : level === "medium" ? (
+          <BoardMedium />
+        ) : level === "hard" ? (
+          <BoardHard />
+        ) : (
+          <BoardExtreme />
+        )}
       </div>
     </div>
   );

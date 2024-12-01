@@ -21,162 +21,17 @@ export default function Board() {
     {
       id: 1,
       name: "plant 1",
-      icon: <RiPlantLine className="h-4 w-4 xl:w-8 xl:h-8" />,
+      icon: <RiPlantLine className="h-5 w-5 2xl:w-8 2xl:h-8" />,
     },
     {
       id: 2,
       name: "plant 2",
-      icon: <TbPlant2 className="h-3 w-3 xl:w-8 xl:h-8" />,
+      icon: <TbPlant2 className="h-5 w-5 2xl:w-8 2xl:h-8" />,
     },
     {
       id: 3,
       name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
-    },
-    {
-      id: 3,
-      name: "plant 3",
-      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+      icon: <PiPlant className="h-5 w-5 2xl:w-8 2xl:h-8" />,
     },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);

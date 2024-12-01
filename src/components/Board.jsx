@@ -325,7 +325,7 @@ export default function Board() {
 
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
-      <div className="h-screen lg:mt-[4rem] justify-center p-8">
+      <div className="h-screen lg:mt-[4rem]  p-2">
         <div
           className={`grid ${
             level === "easy"
@@ -335,7 +335,7 @@ export default function Board() {
               : level === "hard"
               ? "grid-cols-6"
               : "grid-cols-8"
-          } w-full   justify-center gap-2`}
+          } w-full    gap-2`}
         >
           {shuffledCards.map((card, index) => (
             <motion.div
@@ -346,7 +346,7 @@ export default function Board() {
               transition={{ duration: 0.4 }}
               key={index}
               onClick={() => handleCardClick(card.id)}
-              className={`w-[2rem] h-[2rem] sm:w-[2rem] sm:h-[2rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
+              className={`w-[2.5rem] h-[2.5rem] sm:w-[3rem] sm:h-[3rem] xl:w-[3.5rem] xl:h-[3.5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
                 flippedCard.includes(card.id) || card.isMatched
                   ? "bg-purple-600"
                   : "bg-yellow-400"

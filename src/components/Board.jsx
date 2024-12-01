@@ -27,7 +27,7 @@ export default function Board() {
   const [matchedPair, setMatchedPair] = useState(0);
   const [match, setMatch] = useRecoilState(matchLevelState);
 
-  const level = useRecoilValue(gameLevelState);
+  const [level, setLevel] = useRecoilState(gameLevelState);
   const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
   const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
   const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
@@ -75,6 +75,10 @@ export default function Board() {
     if (matchedPair === cards.length) {
       setTimeout(() => {
         setMatch((prev) => prev + 1);
+
+        if (match > 4) {
+          setLevel("medium");
+        }
 
         shuffleCards(cards);
 
@@ -180,17 +184,7 @@ export default function Board() {
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
       <div className="h-full lg:mt-[4rem] justify-center p-8">
-        <div
-          className={`grid ${
-            level === "easy"
-              ? "grid-cols-3"
-              : level === "medium"
-              ? "grid-cols-4"
-              : level === "hard"
-              ? "grid-cols-6"
-              : "grid-cols-8"
-          }   justify-center gap-2`}
-        >
+        <div className={`grid grid-cols-3   justify-center gap-2`}>
           {shuffledCards.map((card, index) => (
             <motion.div
               animate={{

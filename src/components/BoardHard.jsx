@@ -91,6 +91,9 @@ export default function BoardHard() {
     if (matchedPair === cards.length) {
       setTimeout(() => {
         setMatch((prev) => prev + 1);
+        if (match === 5) {
+          setLevel("extreme");
+        }
 
         shuffleCards(cards);
 

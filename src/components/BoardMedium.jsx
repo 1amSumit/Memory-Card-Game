@@ -80,6 +80,9 @@ export default function BoardMedium() {
     if (matchedPair === cards.length) {
       setTimeout(() => {
         setMatch((prev) => prev + 1);
+        if (match === 5) {
+          setLevel("hard");
+        }
 
         shuffleCards(cards);
 

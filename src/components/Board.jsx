@@ -18,12 +18,166 @@ import { turnState } from "../store/moves";
 
 export default function Board() {
   const cards = [
-    { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
-    { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
-    { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    // { id: 4, name: "plant 4", icon: <PiPlant className="w-8 h-8" /> },
-    // { id: 5, name: "plant 5", icon: <PiPlant className="w-8 h-8" /> },
-    // { id: 6, name: "plant 6", icon: <PiPlant className="w-8 h-8" /> },
+    {
+      id: 1,
+      name: "plant 1",
+      icon: <RiPlantLine className="h-4 w-4 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 2,
+      name: "plant 2",
+      icon: <TbPlant2 className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <PiPlant className="h-3 w-3 xl:w-8 xl:h-8" />,
+    },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);
@@ -172,7 +326,17 @@ export default function Board() {
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
       <div className="h-screen lg:mt-[4rem] justify-center p-8">
-        <div className="grid grid-cols-3 w-full max-w-md  justify-center gap-2">
+        <div
+          className={`grid ${
+            level === "easy"
+              ? "grid-cols-3"
+              : level === "medium"
+              ? "grid-cols-4"
+              : level === "hard"
+              ? "grid-cols-6"
+              : "grid-cols-8"
+          } w-full   justify-center gap-2`}
+        >
           {shuffledCards.map((card, index) => (
             <motion.div
               animate={{
@@ -182,7 +346,7 @@ export default function Board() {
               transition={{ duration: 0.4 }}
               key={index}
               onClick={() => handleCardClick(card.id)}
-              className={`w-[5rem] h-[5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
+              className={`w-[2rem] h-[2rem] sm:w-[2rem] sm:h-[2rem] md:w-[4rem] md:h-[4rem] lg:w-[5rem] lg:h-[5rem] rounded-xl  cursor-pointer flex items-center justify-center ${
                 flippedCard.includes(card.id) || card.isMatched
                   ? "bg-purple-600"
                   : "bg-yellow-400"

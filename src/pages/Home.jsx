@@ -32,23 +32,23 @@ export default function Home() {
   return (
     <div>
       <div className="flex flex-row justify-between">
-        <div className="flex flex-col gap-[2rem]">
-          <h2 className="text-gray-200 font-bold font-sour text-xl md:text-4xl">
+        <div className="flex flex-col gap-[1rem]">
+          <h2 className="text-gray-200 font-bold font-sour text-xl xl:text-4xl">
             Hello {username}
           </h2>
 
           <div>
-            <p className="text-gray-200 text-lg md:text-2xl font-sour">
+            <p className="text-gray-200 text-lg xl:text-2xl font-sour">
               Level: {level}
             </p>
-            <p className="text-gray-200 text-lg md:text-2xl font-sour">
+            <p className="text-gray-200 text-lg xl:text-2xl font-sour">
               Match: {match}
             </p>
           </div>
         </div>
 
         <div className="flex flex-col gap-1">
-          <p className="font-sour text-sm md:text-lg lg:text-2xl text-gray-200">
+          <p className="font-sour text-sm sm:text-lg xl:text-2xl text-gray-200">
             Your Score:
             {level === "easy"
               ? scoreEasy
@@ -56,7 +56,7 @@ export default function Home() {
               ? scoreMedium
               : scoreHard}
           </p>
-          <p className="font-sour text-sm md:text-lg lg:text-2xl text-gray-200">
+          <p className="font-sour text-sm sm:text-lg xl:text-2xl text-gray-200">
             High Score:{" "}
             {level === "easy"
               ? easyHighScore
@@ -69,7 +69,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-center justify-center">
-        <p className="text-gray-200 text-lg lg:text-3xl font-sour">
+        <p className="text-gray-200 text-xl xl:text-3xl font-sour">
           Turns: {turns}
         </p>
         <Board />

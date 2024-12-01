@@ -15,6 +15,7 @@ export default function Levels() {
     { level: "1-10", difficulty: "Easy" },
     { level: "11-20", difficulty: "Medium" },
     { level: "21-30", difficulty: "Hard" },
+    { level: "31-40", difficulty: "Extreme" },
   ];
 
   return (
@@ -27,7 +28,7 @@ export default function Levels() {
         <h1 className="text-4xl font-bold text-center text-white mb-8">
           Choose Your Level
         </h1>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-4xl">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 w-full max-w-4xl">
           {levels.map(({ level, difficulty }) => (
             <LevelButton
               key={level}

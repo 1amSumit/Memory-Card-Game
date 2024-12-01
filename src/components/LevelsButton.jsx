@@ -9,6 +9,7 @@ export const LevelButton = ({ difficulty, selected, onClick }) => {
     Easy: "bg-green-500 hover:bg-green-600 focus:ring-green-400",
     Medium: "bg-yellow-500 hover:bg-yellow-600 focus:ring-yellow-400",
     Hard: "bg-red-500 hover:bg-red-600 focus:ring-red-400",
+    Extreme: "bg-purple-500 hover:bg-purple-600 focus:ring-purple-400",
   };
 
   const selectedClasses = selected

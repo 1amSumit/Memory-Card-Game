@@ -2,7 +2,9 @@ import { useRecoilState, useRecoilValue } from "recoil";
 import { highScoreUsername, usernameState } from "../store/username";
 import {
   easyHighScoreState,
+  extremeHighScoreState,
   hardHighScoreState,
+  highScoreState,
   mediumHighScoreState,
   userScoreEasyState,
   userScoreHardState,
@@ -32,10 +34,12 @@ export default function Home() {
   const [scoreEasy] = useRecoilState(userScoreEasyState);
   const [scoreMedium] = useRecoilState(userScoreMediumState);
   const [scoreHard] = useRecoilState(userScoreHardState);
+  const [highScore, setHighScore] = useRecoilState(highScoreState);
 
   const [easyHighScore] = useRecoilState(easyHighScoreState);
   const [mediumHighScore] = useRecoilState(mediumHighScoreState);
   const [hardHighScore] = useRecoilState(hardHighScoreState);
+  const [extremeHighScore] = useRecoilState(extremeHighScoreState);
 
   const level = useRecoilValue(gameLevelState);
   const match = useRecoilValue(matchLevelState);
@@ -72,6 +76,17 @@ export default function Home() {
     };
   }, [navigate, toggleMusic]);
 
+  useEffect(() => {
+    setHighScore(
+      (prev) =>
+        prev +
+        easyHighScore +
+        mediumHighScore +
+        hardHighScore +
+        extremeHighScore
+    );
+  }, [easyHighScore, mediumHighScore, hardHighScore, extremeHighScore]);
+
   return (
     <div className="flex flex-col justify-between h-screen">
       <div className="flex flex-row justify-between">
@@ -100,13 +115,7 @@ export default function Home() {
               : scoreHard}
           </p>
           <p className="font-sour text-sm sm:text-lg 2xl:text-2xl text-gray-200">
-            High Score:{" "}
-            {level === "easy"
-              ? easyHighScore
-              : level === "medium"
-              ? mediumHighScore
-              : hardHighScore}{" "}
-            by {highScoreUser}
+            High Score: {highScore} by {highScoreUser}
           </p>
         </div>
       </div>

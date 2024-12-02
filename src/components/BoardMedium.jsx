@@ -1,20 +1,13 @@
-import { RiPlantLine } from "react-icons/ri";
-import { TbPlant2 } from "react-icons/tb";
-import { PiPlant } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
+import { PiPlant } from "react-icons/pi";
+import { RiPlantLine } from "react-icons/ri";
+import { TbPlant2 } from "react-icons/tb";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { matchLevelState } from "../store/match";
 import { gameLevelState } from "../store/level";
-import {
-  easyHighScoreState,
-  hardHighScoreState,
-  mediumHighScoreState,
-  userScoreEasyState,
-  userScoreHardState,
-  userScoreMediumState,
-} from "../store/score";
+import { matchLevelState } from "../store/match";
 import { turnState } from "../store/moves";
+import { mediumHighScoreState, userScoreMediumState } from "../store/score";
 
 export default function BoardMedium() {
   const cards = [
@@ -33,30 +26,17 @@ export default function BoardMedium() {
   const [match, setMatch] = useRecoilState(matchLevelState);
 
   const level = useRecoilValue(gameLevelState);
-  const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
   const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
-  const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
-  const [easyHighScore, setEasyHighScore] = useRecoilState(easyHighScoreState);
   const [mediumHighScore, setMediumHighScore] =
     useRecoilState(mediumHighScoreState);
-  const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
+
   const [turns, setTurns] = useRecoilState(turnState);
 
   useEffect(() => {
-    localStorage.setItem("easyScore", scoreEasy);
     localStorage.setItem("mediumScore", scoreMedium);
-    localStorage.setItem("hardScore", scoreHard);
-    localStorage.setItem("easyHighScore", easyHighScore);
+
     localStorage.setItem("mediumHighScore", mediumHighScore);
-    localStorage.setItem("hardHighScore", hardHighScore);
-  }, [
-    scoreEasy,
-    scoreMedium,
-    scoreHard,
-    easyHighScore,
-    mediumHighScore,
-    hardHighScore,
-  ]);
+  }, [scoreMedium, mediumHighScore]);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -86,15 +66,6 @@ export default function BoardMedium() {
 
         shuffleCards(cards);
 
-        if (level === "easy") {
-          if (turns > cards.length + 3) {
-            setScoreEasy((prev) => prev + 15);
-          } else if (turns === cards.length || turns === cards.length + 1) {
-            setScoreEasy((prev) => prev + 20);
-          } else {
-            setScoreEasy((prev) => prev + 10);
-          }
-        }
         if (level === "medium") {
           if (turns > cards.length + 3) {
             setScoreMedium((prev) => prev + 25);
@@ -104,42 +75,17 @@ export default function BoardMedium() {
             setScoreMedium((prev) => prev + 20);
           }
         }
-        if (level === "hard") {
-          if (turns > cards.length + 3) {
-            setScoreHard((prev) => prev + 35);
-          } else if (turns === cards.length || turns === cards.length + 1) {
-            setScoreHard((prev) => prev + 40);
-          } else {
-            setScoreHard((prev) => prev + 30);
-          }
-        }
-        if (level === "extreme") {
-          if (turns > cards.length + 3) {
-            setScoreHard((prev) => prev + 45);
-          } else if (turns === cards.length || turns === cards.length + 1) {
-            setScoreHard((prev) => prev + 50);
-          } else {
-            setScoreHard((prev) => prev + 40);
-          }
-        }
+
         setTurns(0);
       }, 1000);
     }
   }, [matchedPair, cards.length, setMatch, setTurns]);
 
   useEffect(() => {
-    if (scoreEasy > easyHighScore) {
-      setEasyHighScore(scoreEasy);
-    }
-
-    if (scoreHard > hardHighScore) {
-      setHardHighScore(scoreHard);
-    }
-
     if (scoreMedium > mediumHighScore) {
       setMediumHighScore(scoreMedium);
     }
-  }, [scoreEasy, scoreMedium, scoreHard]);
+  }, [scoreMedium]);
 
   useEffect(() => {
     shuffleCards(cards);

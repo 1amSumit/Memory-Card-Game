@@ -1,20 +1,13 @@
-import { RiPlantLine } from "react-icons/ri";
-import { TbPlant2 } from "react-icons/tb";
-import { PiPlant } from "react-icons/pi";
 import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
-import { useRecoilState, useRecoilValue } from "recoil";
-import { matchLevelState } from "../store/match";
+import { PiPlant } from "react-icons/pi";
+import { RiPlantLine } from "react-icons/ri";
+import { TbPlant2 } from "react-icons/tb";
+import { useRecoilState } from "recoil";
 import { gameLevelState } from "../store/level";
-import {
-  easyHighScoreState,
-  hardHighScoreState,
-  mediumHighScoreState,
-  userScoreEasyState,
-  userScoreHardState,
-  userScoreMediumState,
-} from "../store/score";
+import { matchLevelState } from "../store/match";
 import { turnState } from "../store/moves";
+import { easyHighScoreState, userScoreEasyState } from "../store/score";
 
 export default function Board() {
   const cards = [
@@ -29,29 +22,14 @@ export default function Board() {
 
   const [level, setLevel] = useRecoilState(gameLevelState);
   const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
-  const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
-  const [scoreHard, setScoreHard] = useRecoilState(userScoreHardState);
   const [easyHighScore, setEasyHighScore] = useRecoilState(easyHighScoreState);
-  const [mediumHighScore, setMediumHighScore] =
-    useRecoilState(mediumHighScoreState);
-  const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
+
   const [turns, setTurns] = useRecoilState(turnState);
 
   useEffect(() => {
     localStorage.setItem("easyScore", scoreEasy);
-    localStorage.setItem("mediumScore", scoreMedium);
-    localStorage.setItem("hardScore", scoreHard);
     localStorage.setItem("easyHighScore", easyHighScore);
-    localStorage.setItem("mediumHighScore", mediumHighScore);
-    localStorage.setItem("hardHighScore", hardHighScore);
-  }, [
-    scoreEasy,
-    scoreMedium,
-    scoreHard,
-    easyHighScore,
-    mediumHighScore,
-    hardHighScore,
-  ]);
+  }, [scoreEasy, easyHighScore]);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -91,33 +69,7 @@ export default function Board() {
             setScoreEasy((prev) => prev + 10);
           }
         }
-        if (level === "medium") {
-          if (turns > cards.length + 3) {
-            setScoreMedium((prev) => prev + 25);
-          } else if (turns === cards.length || turns === cards.length + 1) {
-            setScoreMedium((prev) => prev + 30);
-          } else {
-            setScoreMedium((prev) => prev + 20);
-          }
-        }
-        if (level === "hard") {
-          if (turns > cards.length + 3) {
-            setScoreHard((prev) => prev + 35);
-          } else if (turns === cards.length || turns === cards.length + 1) {
-            setScoreHard((prev) => prev + 40);
-          } else {
-            setScoreHard((prev) => prev + 30);
-          }
-        }
-        if (level === "extreme") {
-          if (turns > cards.length + 3) {
-            setScoreHard((prev) => prev + 45);
-          } else if (turns === cards.length || turns === cards.length + 1) {
-            setScoreHard((prev) => prev + 50);
-          } else {
-            setScoreHard((prev) => prev + 40);
-          }
-        }
+
         setTurns(0);
       }, 1000);
     }
@@ -127,15 +79,7 @@ export default function Board() {
     if (scoreEasy > easyHighScore) {
       setEasyHighScore(scoreEasy);
     }
-
-    if (scoreHard > hardHighScore) {
-      setHardHighScore(scoreHard);
-    }
-
-    if (scoreMedium > mediumHighScore) {
-      setMediumHighScore(scoreMedium);
-    }
-  }, [scoreEasy, scoreMedium, scoreHard]);
+  }, [scoreEasy]);
 
   useEffect(() => {
     shuffleCards(cards);

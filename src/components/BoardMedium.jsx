@@ -62,6 +62,7 @@ export default function BoardMedium() {
         setMatch((prev) => prev + 1);
         if (match === 5) {
           setLevel("hard");
+          setMatch(1);
         }
 
         shuffleCards(cards);

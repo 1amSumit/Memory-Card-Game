@@ -56,6 +56,7 @@ export default function Board() {
 
         if (match > 4) {
           setLevel("medium");
+          setMatch(1);
         }
 
         shuffleCards(cards);

@@ -24,6 +24,7 @@ import {
   MdOutlineMusicNote as MusicOn,
   MdOutlineMusicOff as MusicOff,
 } from "react-icons/md";
+import { motion } from "framer-motion";
 
 import { CiPause1 as Pause } from "react-icons/ci";
 
@@ -78,14 +79,23 @@ export default function Home() {
 
   useEffect(() => {
     setHighScore(
-      (prev) =>
-        prev +
-        easyHighScore +
-        mediumHighScore +
-        hardHighScore +
-        extremeHighScore
+      easyHighScore + mediumHighScore + hardHighScore + extremeHighScore
     );
   }, [easyHighScore, mediumHighScore, hardHighScore, extremeHighScore]);
+
+  const levelAnimation = {
+    initial: { x: "-100vw", opacity: 0 },
+    animate: {
+      x: 0,
+      opacity: [1],
+      transition: { type: "spring", stiffness: 50, damping: 10 },
+    },
+    exit: {
+      x: "100vw",
+      opacity: 0,
+      transition: { duration: 0.4 },
+    },
+  };
 
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -121,6 +131,16 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-center ">
+        <motion.div
+          key={level}
+          variants={levelAnimation}
+          initial="initial"
+          animate="animate"
+          exit="exit"
+          className="text-center text-4xl font-bold text-blue-500 my-4"
+        >
+          {level.toUpperCase()}
+        </motion.div>
         <p className="text-gray-200 text-xl 2xl:text-3xl font-sour">
           Turns: {turns}
         </p>

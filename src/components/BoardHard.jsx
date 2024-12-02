@@ -71,6 +71,7 @@ export default function BoardHard() {
         setMatch((prev) => prev + 1);
         if (match === 5) {
           setLevel("extreme");
+          setMatch(1);
         }
 
         shuffleCards(cards);

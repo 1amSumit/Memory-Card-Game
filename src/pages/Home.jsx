@@ -83,19 +83,19 @@ export default function Home() {
     );
   }, [easyHighScore, mediumHighScore, hardHighScore, extremeHighScore]);
 
-  const levelAnimation = {
-    initial: { x: "-100vw", opacity: 0 },
-    animate: {
-      x: 0,
-      opacity: [1],
-      transition: { type: "spring", stiffness: 50, damping: 10 },
-    },
-    exit: {
-      x: "100vw",
-      opacity: 0,
-      transition: { duration: 0.4 },
-    },
-  };
+  // const levelAnimation = {
+  //   initial: { x: "-100vw", opacity: 0 },
+  //   animate: {
+  //     x: 0,
+  //     opacity: [1],
+  //     transition: { type: "spring", stiffness: 50, damping: 10 },
+  //   },
+  //   exit: {
+  //     x: "100vw",
+  //     opacity: 0,
+  //     transition: { duration: 0.4 },
+  //   },
+  // };
 
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -131,7 +131,7 @@ export default function Home() {
       </div>
 
       <div className="flex flex-col items-center ">
-        <motion.div
+        {/* <motion.div
           key={level}
           variants={levelAnimation}
           initial="initial"
@@ -140,7 +140,7 @@ export default function Home() {
           className="text-center text-4xl font-bold text-blue-500 my-4"
         >
           {level.toUpperCase()}
-        </motion.div>
+        </motion.div> */}
         <p className="text-gray-200 text-xl 2xl:text-3xl font-sour">
           Turns: {turns}
         </p>

@@ -33,15 +33,17 @@ export default function RootLayout() {
   );
 
   useEffect(() => {
-    const easyScore = parseInt(localStorage.getItem("easyScore"));
-    const mediumScore = parseInt(localStorage.getItem("mediumScore"));
-    const hardScore = parseInt(localStorage.getItem("hardScore"));
-    const extremeScore = parseInt(localStorage.getItem("extremeScore"));
+    const easyScore = parseInt(localStorage.getItem("easyScore")) || 0;
+    const mediumScore = parseInt(localStorage.getItem("mediumScore")) || 0;
+    const hardScore = parseInt(localStorage.getItem("hardScore")) || 0;
+    const extremeScore = parseInt(localStorage.getItem("extremeScore")) || 0;
 
-    const easyHighScore = parseInt(localStorage.getItem("easyHighScore"));
-    const mediumHighScore = parseInt(localStorage.getItem("mediumHighScore"));
-    const hardHighScore = parseInt(localStorage.getItem("hardHighScore"));
-    const extrmeHighScore = parseInt(localStorage.getItem("extremeHighScore"));
+    const easyHighScore = parseInt(localStorage.getItem("easyHighScore")) || 0;
+    const mediumHighScore =
+      parseInt(localStorage.getItem("mediumHighScore")) || 0;
+    const hardHighScore = parseInt(localStorage.getItem("hardHighScore")) || 0;
+    const extremeHighScore =
+      parseInt(localStorage.getItem("extremeHighScore")) || 0;
 
     setScoreEasy(easyScore);
     setScoreMedium(mediumScore);
@@ -51,7 +53,7 @@ export default function RootLayout() {
     setEasyHighScore(easyHighScore);
     setMediumScore(mediumHighScore);
     setHardHighScore(hardHighScore);
-    setExtremeHighScore(extrmeHighScore);
+    setExtremeHighScore(extremeHighScore);
   }, []);
 
   useEffect(() => {

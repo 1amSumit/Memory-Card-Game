@@ -5,6 +5,7 @@ import UserName from "./pages/UserName";
 import Welcome from "./pages/Welcome";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Levels from "./pages/Levels";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -20,5 +21,10 @@ export default function App() {
       ],
     },
   ]);
-  return <RouterProvider router={router} />;
+  const queryClinet = new QueryClient();
+  return (
+    <QueryClientProvider client={queryClinet}>
+      <RouterProvider router={router} />;
+    </QueryClientProvider>
+  );
 }

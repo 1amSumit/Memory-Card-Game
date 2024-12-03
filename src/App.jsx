@@ -24,7 +24,7 @@ export default function App() {
   const queryClinet = new QueryClient();
   return (
     <QueryClientProvider client={queryClinet}>
-      <RouterProvider router={router} />;
+      <RouterProvider router={router} />
     </QueryClientProvider>
   );
 }

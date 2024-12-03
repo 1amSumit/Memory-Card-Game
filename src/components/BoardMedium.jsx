@@ -11,14 +11,46 @@ import { mediumHighScoreState, userScoreMediumState } from "../store/score";
 
 export default function BoardMedium() {
   const cards = [
-    { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
-    { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
-    { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 4, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 5, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 6, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 7, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 8, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    {
+      id: 1,
+      name: "plant 1",
+      icon: <img src="/plant/p-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 2,
+      name: "plant 2",
+      icon: <img src="/plant/p-2.png" className="w-8 h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <img src="/plant/p-3.png" className="w-8 h-8" />,
+    },
+    {
+      id: 4,
+      name: "plant 4",
+      icon: <img src="/plant/p-4.png" className="w-8 h-8" />,
+    },
+    {
+      id: 5,
+      name: "animal 1",
+      icon: <img src="/animal/ani-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 6,
+      name: "animal 2",
+      icon: <img src="/animal/ani-2.png" className="w-8 h-8" />,
+    },
+    {
+      id: 7,
+      name: "animal 3",
+      icon: <img src="/animal/ani-3.png" className="w-8 h-8" />,
+    },
+    {
+      id: 8,
+      name: "animal 4",
+      icon: <img src="/animal/ani-4.png" className="w-8 h-8" />,
+    },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);

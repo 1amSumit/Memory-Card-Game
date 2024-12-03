@@ -143,7 +143,7 @@ export default function Home() {
         </div>
       </div>
 
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center overflow-hidden h-screen">
         {/* <motion.div
           key={level}
           variants={levelAnimation}

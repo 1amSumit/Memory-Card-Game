@@ -11,24 +11,96 @@ import { hardHighScoreState, userScoreHardState } from "../store/score";
 
 export default function BoardHard() {
   const cards = [
-    { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
-    { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
-    { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 4, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 5, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 6, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 7, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 8, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 9, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 10, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 11, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 12, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 13, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 14, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 15, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 16, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 17, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 18, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    {
+      id: 1,
+      name: "plant 1",
+      icon: <img src="/plant/p-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 2,
+      name: "plant 2",
+      icon: <img src="/plant/p-2.png" className="w-8 h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <img src="/plant/p-3.png" className="w-8 h-8" />,
+    },
+    {
+      id: 4,
+      name: "plant 4",
+      icon: <img src="/plant/p-4.png" className="w-8 h-8" />,
+    },
+    {
+      id: 5,
+      name: "plant 5",
+      icon: <img src="/plant/p-5.png" className="w-8 h-8" />,
+    },
+    {
+      id: 6,
+      name: "plant 6",
+      icon: <img src="/plant/p-6.png" className="w-8 h-8" />,
+    },
+    {
+      id: 7,
+      name: "plant 7",
+      icon: <img src="/plant/p-7.png" className="w-8 h-8" />,
+    },
+    {
+      id: 8,
+      name: "plant 8",
+      icon: <img src="/plant/p-8.png" className="w-8 h-8" />,
+    },
+    {
+      id: 9,
+      name: "animal 1",
+      icon: <img src="/animal/ani-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 10,
+      name: "animal 2",
+      icon: <img src="/animal/ani-10.png" className="w-8 h-8" />,
+    },
+    {
+      id: 11,
+      name: "animal 3",
+      icon: <img src="/animal/ani-7.png" className="w-8 h-8" />,
+    },
+    {
+      id: 12,
+      name: "animal 4",
+      icon: <img src="/animal/ani-5.png" className="w-8 h-8" />,
+    },
+    {
+      id: 13,
+      name: "animal 5",
+      icon: <img src="/animal/ani-14.png" className="w-8 h-8" />,
+    },
+    {
+      id: 14,
+      name: "animal 6",
+      icon: <img src="/animal/ani-11.png" className="w-8 h-8" />,
+    },
+    {
+      id: 15,
+      name: "animal 7",
+      icon: <img src="/animal/ani-8.png" className="w-8 h-8" />,
+    },
+    {
+      id: 16,
+      name: "animal 8",
+      icon: <img src="/animal/ani-13.png" className="w-8 h-8" />,
+    },
+    {
+      id: 17,
+      name: "animal 9",
+      icon: <img src="/animal/ani-4.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 10",
+      icon: <img src="/animal/ani-12.png" className="w-8 h-8" />,
+    },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);

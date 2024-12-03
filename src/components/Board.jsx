@@ -1,8 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
-import { PiPlant } from "react-icons/pi";
-import { RiPlantLine } from "react-icons/ri";
-import { TbPlant2 } from "react-icons/tb";
+import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { gameLevelState } from "../store/level";
 import { matchLevelState } from "../store/match";
@@ -10,10 +7,38 @@ import { turnState } from "../store/moves";
 import { easyHighScoreState, userScoreEasyState } from "../store/score";
 
 export default function Board() {
+  const audioFlipRef = useRef();
+  const audioFlipFailRef = useRef();
+
+  const playFlipSound = () => {
+    console.log("hall");
+    if (audioFlipRef.current) {
+      audioFlipRef.current.play();
+    }
+  };
+  const playFlipFailSound = () => {
+    console.log("jhkh");
+    if (audioFlipFailRef.current) {
+      audioFlipFailRef.current.play();
+    }
+  };
+
   const cards = [
-    { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
-    { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
-    { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    {
+      id: 1,
+      name: "plant 1",
+      icon: <img src="/plant/p-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 2,
+      name: "plant 2",
+      icon: <img src="/plant/p-2.png" className="w-8 h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <img src="/plant/p-3.png" className="w-8 h-8" />,
+    },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);
@@ -94,11 +119,15 @@ export default function Board() {
           )
         );
         setMatchedPair((prev) => prev + 1);
+      } else {
+        setTimeout(() => {
+          playFlipFailSound();
+        }, 800);
       }
 
       setTimeout(() => {
         setFlippedCard([]);
-      }, 600);
+      }, 800);
     }
   }, [flippedCard]);
 
@@ -108,6 +137,7 @@ export default function Board() {
 
     setFlippedCard((prev) => {
       const newFlipped = [id, ...prev];
+      playFlipSound();
       return newFlipped;
     });
 
@@ -158,6 +188,8 @@ export default function Board() {
           ))}
         </div>
       </div>
+      <audio ref={audioFlipRef} src="/flipsound.mp3" />
+      <audio ref={audioFlipFailRef} src="/flipfail.mp3" />
     </div>
   );
 }

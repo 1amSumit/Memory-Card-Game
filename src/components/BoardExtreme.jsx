@@ -11,38 +11,166 @@ import { extremeHighScoreState, userScoreExtremeState } from "../store/score";
 
 export default function BoardExtreme() {
   const cards = [
-    { id: 1, name: "plant 1", icon: <RiPlantLine className="w-8 h-8" /> },
-    { id: 2, name: "plant 2", icon: <TbPlant2 className="w-8 h-8" /> },
-    { id: 3, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 4, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 5, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 6, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 7, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 8, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 9, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 10, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 11, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 12, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 13, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 14, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 15, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 16, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 17, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 18, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 19, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 20, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 21, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 22, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 23, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 24, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 25, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 26, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 27, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 28, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 29, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 30, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 31, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
-    { id: 32, name: "plant 3", icon: <PiPlant className="w-8 h-8" /> },
+    {
+      id: 1,
+      name: "plant 1",
+      icon: <img src="/plant/p-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 2,
+      name: "plant 2",
+      icon: <img src="/plant/p-2.png" className="w-8 h-8" />,
+    },
+    {
+      id: 3,
+      name: "plant 3",
+      icon: <img src="/plant/p-3.png" className="w-8 h-8" />,
+    },
+    {
+      id: 4,
+      name: "plant 4",
+      icon: <img src="/plant/p-4.png" className="w-8 h-8" />,
+    },
+    {
+      id: 5,
+      name: "plant 5",
+      icon: <img src="/plant/p-5.png" className="w-8 h-8" />,
+    },
+    {
+      id: 6,
+      name: "plant 6",
+      icon: <img src="/plant/p-6.png" className="w-8 h-8" />,
+    },
+    {
+      id: 7,
+      name: "plant 7",
+      icon: <img src="/plant/p-7.png" className="w-8 h-8" />,
+    },
+    {
+      id: 8,
+      name: "plant 8",
+      icon: <img src="/plant/p-8.png" className="w-8 h-8" />,
+    },
+    {
+      id: 9,
+      name: "plant 9",
+      icon: <img src="/plant/p-9.png" className="w-8 h-8" />,
+    },
+    {
+      id: 10,
+      name: "plant 10",
+      icon: <img src="/plant/p-10.png" className="w-8 h-8" />,
+    },
+    {
+      id: 11,
+      name: "plant 11",
+      icon: <img src="/plant/p-11.png" className="w-8 h-8" />,
+    },
+    {
+      id: 12,
+      name: "plant 12",
+      icon: <img src="/plant/p-12.png" className="w-8 h-8" />,
+    },
+    {
+      id: 13,
+      name: "plant 13",
+      icon: <img src="/plant/p-13.png" className="w-8 h-8" />,
+    },
+    {
+      id: 14,
+      name: "plant 14",
+      icon: <img src="/plant/p-14.png" className="w-8 h-8" />,
+    },
+    {
+      id: 15,
+      name: "plant 15",
+      icon: <img src="/plant/p-15.png" className="w-8 h-8" />,
+    },
+    {
+      id: 16,
+      name: "animal 16",
+      icon: <img src="/plant/p-16.png" className="w-8 h-8" />,
+    },
+    {
+      id: 17,
+      name: "animal 1",
+      icon: <img src="/animal/ani-1.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 2",
+      icon: <img src="/animal/ani-2.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 3",
+      icon: <img src="/animal/ani-3.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 4",
+      icon: <img src="/animal/ani-4.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 5",
+      icon: <img src="/animal/ani-5.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 6",
+      icon: <img src="/animal/ani-6.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 7",
+      icon: <img src="/animal/ani-7.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 8",
+      icon: <img src="/animal/ani-8.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 9",
+      icon: <img src="/animal/ani-9.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 10",
+      icon: <img src="/animal/ani-10.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 11",
+      icon: <img src="/animal/ani-11.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 12",
+      icon: <img src="/animal/ani-12.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 13",
+      icon: <img src="/animal/ani-13.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 14",
+      icon: <img src="/animal/ani-14.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 15",
+      icon: <img src="/animal/ani-15.png" className="w-8 h-8" />,
+    },
+    {
+      id: 18,
+      name: "animal 16",
+      icon: <img src="/animal/ani-16.png" className="w-8 h-8" />,
+    },
   ];
   const [shuffledCards, setShuffledCards] = useState([]);
   const [flippedCard, setFlippedCard] = useState([]);

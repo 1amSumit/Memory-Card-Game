@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { PiPlant } from "react-icons/pi";
 import { RiPlantLine } from "react-icons/ri";
 import { TbPlant2 } from "react-icons/tb";
@@ -112,6 +112,20 @@ export default function BoardHard() {
   const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
   const [turns, setTurns] = useRecoilState(turnState);
 
+  const audioFlipRef = useRef();
+  const audioFlipFailRef = useRef();
+
+  const playFlipSound = () => {
+    if (audioFlipRef.current) {
+      audioFlipRef.current.play();
+    }
+  };
+  const playFlipFailSound = () => {
+    if (audioFlipFailRef.current) {
+      audioFlipFailRef.current.play();
+    }
+  };
+
   const shuffleCards = (card) => {
     const dupliacteCards = [...card, ...card];
 
@@ -180,6 +194,10 @@ export default function BoardHard() {
           )
         );
         setMatchedPair((prev) => prev + 1);
+      } else {
+        setTimeout(() => {
+          playFlipFailSound();
+        }, 800);
       }
 
       setTimeout(() => {
@@ -194,6 +212,7 @@ export default function BoardHard() {
 
     setFlippedCard((prev) => {
       const newFlipped = [id, ...prev];
+      playFlipSound();
       return newFlipped;
     });
 
@@ -254,6 +273,8 @@ export default function BoardHard() {
           ))}
         </div>
       </div>
+      <audio ref={audioFlipRef} src="/flipsound.mp3" />
+      <audio ref={audioFlipFailRef} src="/flipfail.mp3" />
     </div>
   );
 }

@@ -11,13 +11,11 @@ export default function Board() {
   const audioFlipFailRef = useRef();
 
   const playFlipSound = () => {
-    console.log("hall");
     if (audioFlipRef.current) {
       audioFlipRef.current.play();
     }
   };
   const playFlipFailSound = () => {
-    console.log("jhkh");
     if (audioFlipFailRef.current) {
       audioFlipFailRef.current.play();
     }

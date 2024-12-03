@@ -3,15 +3,20 @@ import { FaPlay, FaBrain } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { usernameState } from "../store/username";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { registerUser } from "../services/registerUser";
 
 const UserName = () => {
   const [username, setUsername] = useRecoilState(usernameState);
   const [err, setErr] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    console.log(err);
-  }, [err]);
+  const { mutate } = useMutation({
+    mutationFn: registerUser,
+    onSuccess: () => {
+      console.log("hallo worl");
+    },
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -19,6 +24,8 @@ const UserName = () => {
       setErr("Please enter a username");
       return;
     }
+
+    mutate({ username });
 
     localStorage.setItem("username", username);
     setErr("");

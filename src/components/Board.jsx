@@ -26,11 +26,6 @@ export default function Board() {
 
   const [turns, setTurns] = useRecoilState(turnState);
 
-  useEffect(() => {
-    localStorage.setItem("easyScore", scoreEasy);
-    localStorage.setItem("easyHighScore", easyHighScore);
-  }, [scoreEasy, easyHighScore]);
-
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
     const shuffleCards = dupliacteCards
@@ -78,6 +73,7 @@ export default function Board() {
 
   useEffect(() => {
     if (scoreEasy > easyHighScore) {
+      localStorage.setItem("easyHighScore", easyHighScore);
       setEasyHighScore(scoreEasy);
     }
   }, [scoreEasy]);

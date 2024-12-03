@@ -50,6 +50,11 @@ export default function Home() {
   const audioRef = useRef(null);
   const [pauseHover, setPauseHover] = useState(false);
 
+  useEffect(() => {
+    const highScore = localStorage.getItem("highScore");
+    setHighScore(highScore);
+  }, []);
+
   const toggleMusic = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -78,24 +83,32 @@ export default function Home() {
   }, [navigate, toggleMusic]);
 
   useEffect(() => {
-    setHighScore(
-      easyHighScore + mediumHighScore + hardHighScore + extremeHighScore
-    );
-  }, [easyHighScore, mediumHighScore, hardHighScore, extremeHighScore]);
+    let currentHighScore = highScore;
 
-  // const levelAnimation = {
-  //   initial: { x: "-100vw", opacity: 0 },
-  //   animate: {
-  //     x: 0,
-  //     opacity: [1],
-  //     transition: { type: "spring", stiffness: 50, damping: 10 },
-  //   },
-  //   exit: {
-  //     x: "100vw",
-  //     opacity: 0,
-  //     transition: { duration: 0.4 },
-  //   },
-  // };
+    if (easyHighScore > currentHighScore) {
+      currentHighScore = easyHighScore;
+    }
+    if (mediumHighScore > currentHighScore) {
+      currentHighScore = mediumHighScore;
+    }
+    if (hardHighScore > currentHighScore) {
+      currentHighScore = hardHighScore;
+    }
+    if (extremeHighScore > currentHighScore) {
+      currentHighScore = extremeHighScore;
+    }
+
+    if (currentHighScore > highScore) {
+      setHighScore(currentHighScore);
+      localStorage.setItem("highScore", currentHighScore);
+    }
+  }, [
+    easyHighScore,
+    mediumHighScore,
+    hardHighScore,
+    extremeHighScore,
+    highScore,
+  ]);
 
   return (
     <div className="flex flex-col justify-between h-screen">
@@ -125,7 +138,7 @@ export default function Home() {
               : scoreHard}
           </p>
           <p className="font-sour text-sm sm:text-lg 2xl:text-2xl text-gray-200">
-            High Score: {highScore} by {highScoreUser}
+            High Score: {highScore}
           </p>
         </div>
       </div>

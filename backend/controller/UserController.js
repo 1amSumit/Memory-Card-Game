@@ -12,6 +12,7 @@ exports.registerUser = async (req, res) => {
         "Username already exists!. Please enter different Username."
       );
     }
+
     const newUser = await User.create({ username });
     res.status(201).json({ message: "User registered successfully!", newUser });
   } catch (err) {

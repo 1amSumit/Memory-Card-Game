@@ -57,12 +57,6 @@ export default function BoardExtreme() {
   );
   const [turns, setTurns] = useRecoilState(turnState);
 
-  useEffect(() => {
-    localStorage.setItem("extremeScore", scoreExtreme);
-
-    localStorage.setItem("extremeHighScore", extremeHighScore);
-  }, [scoreExtreme, extremeHighScore]);
-
   const shuffleCards = (card) => {
     const dupliacteCards = [...card, ...card];
 
@@ -106,6 +100,8 @@ export default function BoardExtreme() {
   useEffect(() => {
     if (scoreExtreme > extremeHighScore) {
       setExtremeHighScore(scoreExtreme);
+
+      localStorage.setItem("extremeHighScore", extremeHighScore);
     }
   }, [scoreExtreme]);
 

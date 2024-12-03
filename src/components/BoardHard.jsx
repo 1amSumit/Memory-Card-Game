@@ -40,12 +40,6 @@ export default function BoardHard() {
   const [hardHighScore, setHardHighScore] = useRecoilState(hardHighScoreState);
   const [turns, setTurns] = useRecoilState(turnState);
 
-  useEffect(() => {
-    localStorage.setItem("hardScore", scoreHard);
-
-    localStorage.setItem("hardHighScore", hardHighScore);
-  }, [scoreHard, hardHighScore]);
-
   const shuffleCards = (card) => {
     const dupliacteCards = [...card, ...card];
 
@@ -94,6 +88,7 @@ export default function BoardHard() {
   useEffect(() => {
     if (scoreHard > hardHighScore) {
       setHardHighScore(scoreHard);
+      localStorage.setItem("hardHighScore", hardHighScore);
     }
   }, [scoreHard]);
 

@@ -32,12 +32,6 @@ export default function BoardMedium() {
 
   const [turns, setTurns] = useRecoilState(turnState);
 
-  useEffect(() => {
-    localStorage.setItem("mediumScore", scoreMedium);
-
-    localStorage.setItem("mediumHighScore", mediumHighScore);
-  }, [scoreMedium, mediumHighScore]);
-
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
     const shuffleCards = dupliacteCards
@@ -84,6 +78,7 @@ export default function BoardMedium() {
 
   useEffect(() => {
     if (scoreMedium > mediumHighScore) {
+      localStorage.setItem("mediumHighScore", mediumHighScore);
       setMediumHighScore(scoreMedium);
     }
   }, [scoreMedium]);

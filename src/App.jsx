@@ -6,6 +6,7 @@ import Welcome from "./pages/Welcome";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Levels from "./pages/Levels";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Toaster } from "react-hot-toast";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -24,6 +25,7 @@ export default function App() {
   const queryClinet = new QueryClient();
   return (
     <QueryClientProvider client={queryClinet}>
+      <Toaster position="to-center" reverseOrder={false} />
       <RouterProvider router={router} />
     </QueryClientProvider>
   );

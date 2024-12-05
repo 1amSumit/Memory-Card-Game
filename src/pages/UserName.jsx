@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { FaPlay, FaBrain } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { useRecoilState } from "recoil";
 import { usernameState } from "../store/username";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { registerUser } from "../services/registerUser";
+import toast from "react-hot-toast";
 
 const UserName = () => {
   const [username, setUsername] = useRecoilState(usernameState);
@@ -13,8 +14,20 @@ const UserName = () => {
 
   const { mutate } = useMutation({
     mutationFn: registerUser,
-    onSuccess: () => {
-      console.log("hallo worl");
+    onSuccess: (data) => {
+      if (data?.isUnique) {
+        // Only set username in localStorage if it's unique
+        localStorage.setItem("username", username);
+        toast.success("User Registration Successfully!");
+        navigate("/");
+      } else {
+        // Show error message if the username is not unique
+        setErr("Username already taken. Please choose another one.");
+      }
+    },
+    onError: (error) => {
+      toast.error("Error registering user: " + error.message);
+      setErr(error.message);
     },
   });
 
@@ -25,18 +38,15 @@ const UserName = () => {
       return;
     }
 
-    mutate({ username });
-
-    localStorage.setItem("username", username);
+    // Reset error before making the mutation call
     setErr("");
-
-    navigate("/");
+    mutate({ username });
   };
 
   const handleInputChange = (e) => {
     setUsername(e.target.value);
     if (err) {
-      setErr("");
+      setErr(""); // Reset error when user starts typing again
     }
   };
 

@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { PiPlant } from "react-icons/pi";
-import { RiPlantLine } from "react-icons/ri";
-import { TbPlant2 } from "react-icons/tb";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gameLevelState } from "../store/level";
 import { matchLevelState } from "../store/match";
-import { turnState } from "../store/moves";
+import { extremeTurnState } from "../store/moves";
 import { extremeHighScoreState, userScoreExtremeState } from "../store/score";
 
 export default function BoardExtreme() {
@@ -183,10 +180,11 @@ export default function BoardExtreme() {
   const [extremeHighScore, setExtremeHighScore] = useRecoilState(
     extremeHighScoreState
   );
-  const [turns, setTurns] = useRecoilState(turnState);
+  const [turns, setTurns] = useRecoilState(extremeTurnState);
 
   const audioFlipRef = useRef();
   const audioFlipFailRef = useRef();
+  const audioMatchRef = useRef();
 
   const playFlipSound = () => {
     if (audioFlipRef.current) {
@@ -196,6 +194,11 @@ export default function BoardExtreme() {
   const playFlipFailSound = () => {
     if (audioFlipFailRef.current) {
       audioFlipFailRef.current.play();
+    }
+  };
+  const playMatchSound = () => {
+    if (audioMatchRef.current) {
+      audioMatchRef.current.play();
     }
   };
 
@@ -234,7 +237,7 @@ export default function BoardExtreme() {
             setScoreExtreme((prev) => prev + 40);
           }
         }
-        setTurns(0);
+        setTurns(40);
       }, 1000);
     }
   }, [matchedPair, cards.length, setMatch, setTurns]);
@@ -262,7 +265,11 @@ export default function BoardExtreme() {
               : card
           )
         );
+        setScoreExtreme((prev) => prev + 1 + matchedPair * 4.5);
         setMatchedPair((prev) => prev + 1);
+        setTimeout(() => {
+          playMatchSound();
+        }, 300);
       } else {
         setTimeout(() => {
           playFlipFailSound();
@@ -292,9 +299,21 @@ export default function BoardExtreme() {
     );
 
     if (flippedCard.length >= 1) {
-      setTurns((prev) => prev + 1);
+      setTurns((prev) => prev - 1);
     }
   };
+
+  useEffect(() => {
+    if (turns === 0) {
+      setTimeout(() => {
+        setLevel("easy");
+        setMatch(1);
+        setTurns(40);
+        setScoreExtreme(0);
+        setFlippedCard([]);
+      }, 600);
+    }
+  }, [turns]);
 
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
@@ -344,6 +363,7 @@ export default function BoardExtreme() {
       </div>
       <audio ref={audioFlipRef} src="/flipsound.mp3" />
       <audio ref={audioFlipFailRef} src="/flipfail.mp3" />
+      <audio ref={audioMatchRef} src="/matchsound.mp3" />
     </div>
   );
 }

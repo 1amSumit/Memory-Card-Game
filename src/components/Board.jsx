@@ -3,12 +3,13 @@ import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { gameLevelState } from "../store/level";
 import { matchLevelState } from "../store/match";
-import { turnState } from "../store/moves";
+import { easyTurnState } from "../store/moves";
 import { easyHighScoreState, userScoreEasyState } from "../store/score";
 
 export default function Board() {
   const audioFlipRef = useRef();
   const audioFlipFailRef = useRef();
+  const audioMatchRef = useRef();
 
   const playFlipSound = () => {
     if (audioFlipRef.current) {
@@ -18,6 +19,11 @@ export default function Board() {
   const playFlipFailSound = () => {
     if (audioFlipFailRef.current) {
       audioFlipFailRef.current.play();
+    }
+  };
+  const playMatchSound = () => {
+    if (audioMatchRef.current) {
+      audioMatchRef.current.play();
     }
   };
 
@@ -47,7 +53,7 @@ export default function Board() {
   const [scoreEasy, setScoreEasy] = useRecoilState(userScoreEasyState);
   const [easyHighScore, setEasyHighScore] = useRecoilState(easyHighScoreState);
 
-  const [turns, setTurns] = useRecoilState(turnState);
+  const [turns, setTurns] = useRecoilState(easyTurnState);
 
   const shuffleCards = (cards) => {
     const dupliacteCards = [...cards, ...cards];
@@ -80,7 +86,7 @@ export default function Board() {
         shuffleCards(cards);
 
         if (level === "easy") {
-          if (turns > cards.length + 3) {
+          if (turns < cards.length) {
             setScoreEasy((prev) => prev + 15);
           } else if (turns === cards.length || turns === cards.length + 1) {
             setScoreEasy((prev) => prev + 20);
@@ -89,7 +95,7 @@ export default function Board() {
           }
         }
 
-        setTurns(0);
+        setTurns(10);
       }, 1000);
     }
   }, [matchedPair, cards.length, setMatch, setTurns]);
@@ -116,7 +122,11 @@ export default function Board() {
               : card
           )
         );
+        setScoreEasy((prev) => prev + 1 + matchedPair * 1.5);
         setMatchedPair((prev) => prev + 1);
+        setTimeout(() => {
+          playMatchSound();
+        }, 300);
       } else {
         setTimeout(() => {
           playFlipFailSound();
@@ -146,9 +156,21 @@ export default function Board() {
     );
 
     if (flippedCard.length >= 1) {
-      setTurns((prev) => prev + 1);
+      setTurns((prev) => prev - 1);
     }
   };
+
+  useEffect(() => {
+    if (turns === 0) {
+      setTimeout(() => {
+        setLevel("easy");
+        setMatch(1);
+        setTurns(10);
+        setScoreEasy(0);
+        setFlippedCard([]);
+      }, 600);
+    }
+  }, [turns]);
 
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
@@ -169,7 +191,7 @@ export default function Board() {
                   : "w-[3rem] h-[3rem]"
               } 2xl:w-[4rem] 2xl:h-[4rem] rounded-xl  cursor-pointer flex items-center justify-center ${
                 flippedCard.includes(card.id) || card.isMatched
-                  ? "bg-purple-600"
+                  ? "bg-purple-500"
                   : "bg-yellow-400"
               }`}
             >
@@ -188,6 +210,7 @@ export default function Board() {
       </div>
       <audio ref={audioFlipRef} src="/flipsound.mp3" />
       <audio ref={audioFlipFailRef} src="/flipfail.mp3" />
+      <audio ref={audioMatchRef} src="/matchsound.mp3" />
     </div>
   );
 }

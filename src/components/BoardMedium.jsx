@@ -1,12 +1,9 @@
 import { motion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
-import { PiPlant } from "react-icons/pi";
-import { RiPlantLine } from "react-icons/ri";
-import { TbPlant2 } from "react-icons/tb";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { gameLevelState } from "../store/level";
 import { matchLevelState } from "../store/match";
-import { turnState } from "../store/moves";
+import { mediumTurnState } from "../store/moves";
 import { mediumHighScoreState, userScoreMediumState } from "../store/score";
 
 export default function BoardMedium() {
@@ -57,14 +54,15 @@ export default function BoardMedium() {
   const [matchedPair, setMatchedPair] = useState(0);
   const [match, setMatch] = useRecoilState(matchLevelState);
 
-  const level = useRecoilValue(gameLevelState);
+  const [level, setLevel] = useRecoilState(gameLevelState);
   const [scoreMedium, setScoreMedium] = useRecoilState(userScoreMediumState);
   const [mediumHighScore, setMediumHighScore] =
     useRecoilState(mediumHighScoreState);
 
-  const [turns, setTurns] = useRecoilState(turnState);
+  const [turns, setTurns] = useRecoilState(mediumTurnState);
   const audioFlipRef = useRef();
   const audioFlipFailRef = useRef();
+  const audioMatchRef = useRef();
 
   const playFlipSound = () => {
     if (audioFlipRef.current) {
@@ -74,6 +72,11 @@ export default function BoardMedium() {
   const playFlipFailSound = () => {
     if (audioFlipFailRef.current) {
       audioFlipFailRef.current.play();
+    }
+  };
+  const playMatchSound = () => {
+    if (audioMatchRef.current) {
+      audioMatchRef.current.play();
     }
   };
 
@@ -99,6 +102,7 @@ export default function BoardMedium() {
     if (matchedPair === cards.length) {
       setTimeout(() => {
         setMatch((prev) => prev + 1);
+
         if (match === 5) {
           setLevel("hard");
           setMatch(1);
@@ -116,7 +120,7 @@ export default function BoardMedium() {
           }
         }
 
-        setTurns(0);
+        setTurns(20);
       }, 1000);
     }
   }, [matchedPair, cards.length, setMatch, setTurns]);
@@ -143,7 +147,11 @@ export default function BoardMedium() {
               : card
           )
         );
+        setScoreMedium((prev) => prev + 1 + matchedPair * 2.5);
         setMatchedPair((prev) => prev + 1);
+        setTimeout(() => {
+          playMatchSound();
+        }, 300);
       } else {
         setTimeout(() => {
           playFlipFailSound();
@@ -173,9 +181,20 @@ export default function BoardMedium() {
     );
 
     if (flippedCard.length >= 1) {
-      setTurns((prev) => prev + 1);
+      setTurns((prev) => prev - 1);
     }
   };
+  useEffect(() => {
+    if (turns === 0) {
+      setTimeout(() => {
+        setLevel("easy");
+        setMatch(1);
+        setTurns(20);
+        setScoreMedium(0);
+        setFlippedCard([]);
+      }, 600);
+    }
+  }, [turns]);
 
   return (
     <div className="bg-gray-900 p-2 lg:p-4">
@@ -225,6 +244,7 @@ export default function BoardMedium() {
       </div>
       <audio ref={audioFlipRef} src="/flipsound.mp3" />
       <audio ref={audioFlipFailRef} src="/flipfail.mp3" />
+      <audio ref={audioMatchRef} src="/matchsound.mp3" />
     </div>
   );
 }

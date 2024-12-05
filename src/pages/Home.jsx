@@ -1,5 +1,23 @@
+import { useEffect, useRef, useState } from "react";
+import {
+  MdOutlineMusicOff as MusicOff,
+  MdOutlineMusicNote as MusicOn,
+} from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { useRecoilState, useRecoilValue } from "recoil";
-import { highScoreUsername, usernameState } from "../store/username";
+import Board from "../components/Board";
+import BoardExtreme from "../components/BoardExtreme";
+import BoardHard from "../components/BoardHard";
+import BoardMedium from "../components/BoardMedium";
+import { gameLevelState } from "../store/level";
+import { matchLevelState } from "../store/match";
+import {
+  easyTurnState,
+  extremeTurnState,
+  hardTurnState,
+  mediumTurnState,
+} from "../store/moves";
+import { playingState } from "../store/music";
 import {
   easyHighScoreState,
   extremeHighScoreState,
@@ -10,21 +28,7 @@ import {
   userScoreHardState,
   userScoreMediumState,
 } from "../store/score";
-import Board from "../components/Board";
-import { gameLevelState } from "../store/level";
-import { matchLevelState } from "../store/match";
-import { turnState } from "../store/moves";
-import BoardMedium from "../components/BoardMedium";
-import BoardHard from "../components/BoardHard";
-import BoardExtreme from "../components/BoardExtreme";
-import { useNavigate } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
-import { playingState } from "../store/music";
-import {
-  MdOutlineMusicNote as MusicOn,
-  MdOutlineMusicOff as MusicOff,
-} from "react-icons/md";
-import { motion } from "framer-motion";
+import { highScoreUsername, usernameState } from "../store/username";
 
 import { CiPause1 as Pause } from "react-icons/ci";
 
@@ -44,7 +48,10 @@ export default function Home() {
 
   const level = useRecoilValue(gameLevelState);
   const match = useRecoilValue(matchLevelState);
-  const [turns] = useRecoilState(turnState);
+  const [easyTurns] = useRecoilState(easyTurnState);
+  const [mediumTurns] = useRecoilState(mediumTurnState);
+  const [hardTurns] = useRecoilState(hardTurnState);
+  const [extremeTurns] = useRecoilState(extremeTurnState);
 
   const navigate = useNavigate();
   const audioRef = useRef(null);
@@ -155,7 +162,14 @@ export default function Home() {
           {level.toUpperCase()}
         </motion.div> */}
         <p className="text-gray-200 text-xl 2xl:text-3xl font-sour">
-          Turns: {turns}
+          Turns:{" "}
+          {level === "easy"
+            ? easyTurns
+            : level === "medium"
+            ? mediumTurns
+            : level === "hard"
+            ? hardTurns
+            : extremeTurns}
         </p>
         {level === "easy" ? (
           <Board />
